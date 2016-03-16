@@ -133,6 +133,5 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             sys.exit("forced exit")
 
-
     print 'No. errors ', len(errors)
     print errors
