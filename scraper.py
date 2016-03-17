@@ -51,7 +51,6 @@ def get_info(soup, text):
     return info
 
 
-
 if __name__ == '__main__':
 
     todays_date = str(datetime.now())
@@ -60,10 +59,8 @@ if __name__ == '__main__':
     errors = []
 
     for sp in portals:
-
         p = sp[1]
         try:
-
             last_page = get_pages(p)
             for p_num in range(0, last_page):
 
@@ -75,7 +72,6 @@ if __name__ == '__main__':
                 except Exception as e:
                     errors.append([page, e])
                     continue
-
 
                 for link in links:
                     try:
