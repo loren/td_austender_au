@@ -57,6 +57,7 @@ if __name__ == '__main__':
     portals = [['open', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Elist'],
                ['closed', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Eclosed']]
     errors = []
+    country_code = 'au'
 
     for sp in portals:
         p = sp[1]
@@ -101,6 +102,7 @@ if __name__ == '__main__':
 
 
                         data = {"tender_url":unicode(tender_url),
+                                "country_code": unicode(country_code),
                                 "status": unicode(status),
                                 "uuid": unicode(uuid),
                                 "title": unicode(title),
