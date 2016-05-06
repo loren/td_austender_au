@@ -95,7 +95,6 @@ if __name__ == '__main__':
                         conditions_for_participation = get_info(tender_soup, 'Conditions for Participation')
                         delivery_timeframe = get_info(tender_soup, 'Timeframe for Delivery')
                         lodgement_address = get_info(tender_soup, 'Address for Lodgement')
-                        #= 'Addenda Available')   #TODO only with login
                         contact_officer = get_info(tender_soup, 'Contact Officer')
                         phone = get_info(tender_soup, 'Phone Number')
                         email = get_info(tender_soup, 'Email Address')
@@ -133,3 +132,5 @@ if __name__ == '__main__':
 
     print 'No. errors ', len(errors)
     print errors
+
+    print 'Addenda Available with login'
