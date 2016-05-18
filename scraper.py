@@ -53,8 +53,6 @@ def get_info(soup, text):
 
 if __name__ == '__main__':
 
-    print 'test push'   #TODO
-
     todays_date = str(datetime.now())
     portals = [['open', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Elist'],
                ['closed', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Eclosed']]
