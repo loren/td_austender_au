@@ -126,6 +126,7 @@ if __name__ == '__main__':
                                 "agency": unicode(agency),
                                 "category": unicode(category),
                                 "deadline": unicode(deadline),
+                                "tenderperiod_enddate": unicode(tenderperiod_enddate),
                                 "publish_date": unicode(publish_date),
                                 "location": unicode(location),
                                 "multi_agency_access": unicode(multi_agency_access),
