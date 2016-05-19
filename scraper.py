@@ -2,11 +2,9 @@
 import sys
 from bs4 import BeautifulSoup
 import urllib
+import datetime as dt
 from datetime import datetime
 import scraperwiki
-
-reload(sys)  # Reload does the trick!
-sys.setdefaultencoding('UTF8')
 
 
 def get_soup(url):
@@ -20,7 +18,6 @@ def get_pages(url):
     lp = soup.find('a', text='2')\
         .findPrevious('strong').text
     last_page = int(lp[lp.rfind(' ')+1:])
-    print last_page
     return last_page
 
 
@@ -51,6 +48,24 @@ def get_info(soup, text):
     return info
 
 
+def stringToDate(datestring):
+   format = "%d-%b-%Y %I:%M %p"
+   if format is None:
+       return datestring
+   return dt.datetime.strptime(datestring, format)
+
+
+def clean_deadline(d):
+    datestring = d[:20].strip()
+    if datestring.find('-') == 1:
+        datestring = '0' + datestring
+    if datestring[datestring.find(':')-2]== ' ':
+        ds = datestring
+        datestring = ds[:ds.find(':')-1] + '0' + ds[ds.find(':')-1:]
+    datetime = stringToDate(datestring)
+    return datetime
+
+
 if __name__ == '__main__':
 
     todays_date = str(datetime.now())
@@ -58,6 +73,7 @@ if __name__ == '__main__':
                ['closed', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Eclosed']]
     errors = []
     country_code = 'au'
+    language = 'en'
 
     for sp in portals:
         p = sp[1]
@@ -66,12 +82,11 @@ if __name__ == '__main__':
             for p_num in range(0, last_page):
 
                 try:
-                    print p_num
                     page = p[:p.find('Row=')+4] + str(p_num*15) + p[p.find('&event'):]
                     print page
                     links = get_links(page)
                 except Exception as e:
-                    errors.append([page, e])
+                    errors.append(['page no.' + str(p_num), e])
                     continue
 
                 for link in links:
@@ -86,6 +101,8 @@ if __name__ == '__main__':
                         agency = get_info(tender_soup, 'Agency')
                         category = get_info(tender_soup, 'Category')
                         deadline = get_info(tender_soup, 'Close Date & Time')
+                        tenderperiod_enddate = clean_deadline(deadline)
+
                         publish_date = get_info(tender_soup, 'Publish Date')
                         location = get_info(tender_soup, 'Location')
                         multi_agency_access= get_info(tender_soup, 'Multi Agency Access')
