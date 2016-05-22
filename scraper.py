@@ -66,6 +66,15 @@ def clean_deadline(d):
     return datetime
 
 
+def get_timezone(z):
+    try:
+        zone = z[z.find('(')+1:z.find(')')].lower()
+        print zone
+    except:
+        zone = ''
+    return zone
+
+
 if __name__ == '__main__':
 
     todays_date = str(datetime.now())
@@ -74,6 +83,9 @@ if __name__ == '__main__':
     errors = []
     country_code = 'au'
     language = 'en'
+    basic_details_need_login = False
+    extra_documents_with_login = True
+    apply_requires_login = True
 
     for sp in portals:
         p = sp[1]
@@ -102,10 +114,10 @@ if __name__ == '__main__':
                         category = get_info(tender_soup, 'Category')
                         deadline = get_info(tender_soup, 'Close Date & Time')
                         tenderperiod_enddate = clean_deadline(deadline)
-
+                        enddate_timezone = get_timezone(deadline)
                         publish_date = get_info(tender_soup, 'Publish Date')
                         location = get_info(tender_soup, 'Location')
-                        multi_agency_access= get_info(tender_soup, 'Multi Agency Access')
+                        multi_agency_access = get_info(tender_soup, 'Multi Agency Access')
                         panel_arrangement = get_info(tender_soup, 'Panel Arrangement')
                         description = get_info(tender_soup, 'Description')
                         other_instructions = get_info(tender_soup, 'Other Instructions ')
@@ -116,9 +128,10 @@ if __name__ == '__main__':
                         phone = get_info(tender_soup, 'Phone Number')
                         email = get_info(tender_soup, 'Email Address')
 
-
                         data = {"tender_url":unicode(tender_url),
                                 "country_code": unicode(country_code),
+                                "language": unicode(language),
+                                "apply_requires_login": unicode(apply_requires_login),
                                 "status": unicode(status),
                                 "uuid": unicode(uuid),
                                 "title": unicode(title),
@@ -127,6 +140,7 @@ if __name__ == '__main__':
                                 "category": unicode(category),
                                 "deadline": unicode(deadline),
                                 "tenderperiod_enddate": unicode(tenderperiod_enddate),
+                                "enddate_timezone": unicode(enddate_timezone),
                                 "publish_date": unicode(publish_date),
                                 "location": unicode(location),
                                 "multi_agency_access": unicode(multi_agency_access),
