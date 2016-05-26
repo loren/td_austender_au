@@ -69,7 +69,6 @@ def clean_deadline(d):
 def get_timezone(z):
     try:
         zone = z[z.find('(')+1:z.find(')')].lower()
-        print zone
     except:
         zone = ''
     return zone
