@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-import sys
 from bs4 import BeautifulSoup
 import urllib
 import datetime as dt
 from datetime import datetime
 import scraperwiki
+import sys
+
+reload(sys) # Reload does the trick!
+sys.setdefaultencoding('UTF8')
 
 
 def get_soup(url):
