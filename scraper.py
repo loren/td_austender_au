@@ -81,7 +81,8 @@ if __name__ == '__main__':
 
     todays_date = str(datetime.now())
     portals = [['open', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Elist'],
-               ['closed', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Eclosed']]
+              # ['closed', 'https://www.tenders.gov.au/?startRow=0&event=public%2EATM%2Eclosed']
+               ]
     errors = []
     country_code = 'au'
     language = 'en'
@@ -93,7 +94,7 @@ if __name__ == '__main__':
         p = sp[1]
         try:
             last_page = get_pages(p)
-            for p_num in range(0, last_page):
+            for p_num in range(0, last_page):   # TODO change back to 0
 
                 try:
                     page = p[:p.find('Row=')+4] + str(p_num*15) + p[p.find('&event'):]
