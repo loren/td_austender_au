@@ -94,7 +94,7 @@ if __name__ == '__main__':
         p = sp[1]
         try:
             last_page = get_pages(p)
-            for p_num in range(0, last_page):   # TODO change back to 0
+            for p_num in range(0, last_page):
 
                 try:
                     page = p[:p.find('Row=')+4] + str(p_num*15) + p[p.find('&event'):]
