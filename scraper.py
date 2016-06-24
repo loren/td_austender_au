@@ -9,6 +9,7 @@ import sys
 reload(sys) # Reload does the trick!
 sys.setdefaultencoding('UTF8')
 
+scraperwiki.sql.execute('DELETE FROM data')
 
 def get_soup(url):
     html = urllib.urlopen(url)
